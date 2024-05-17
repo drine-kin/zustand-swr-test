@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": "b701",
+      "name": "Drine Kin",
+      "email": "drine@gmail.com"
+    },
+    {
+      "name": "Chaw Htay",
+      "email": "chaw@gmail.com",
+      "id": "448c"
+    },
+    {
+      "name": "Gracie",
+      "email": "gracie@gmail.com",
+      "id": "f06c"
+    },
+    {
+      "id": "9286",
+      "name": "Taylor Swift",
+      "email": "taylor@gmail.com"
+    }
+  ]
+}
