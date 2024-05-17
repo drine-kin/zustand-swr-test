@@ -1,10 +1,35 @@
 /* eslint-disable react/prop-types */
 
 import { useUserStore } from "../store/store";
-import { deleteUser } from "../api/users";
+import { deleteUser, useUser } from "../api/users";
 
 const Users = ({ _updateID }) => {
-  const { users } = useUserStore();
+  const setUsers = useUserStore((state) => state.setUsers);
+
+  const { data, isError, isLoading } = useUser();
+
+  if (isError) {
+    return (
+      <div className="w-full max-w-[500px] h-[400px] flex justify-center items-center">
+        <h1 className="text-destructive-500 text-title-1">
+          Unexpected Error Occured
+        </h1>
+        <p>{isError}</p>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="w-full max-w-[500px] h-[400px] flex justify-center items-center">
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
+
+  if (data) {
+    setUsers(data);
+  }
 
   const handleDelete = async (id) => {
     deleteUser(id);
@@ -12,7 +37,7 @@ const Users = ({ _updateID }) => {
 
   return (
     <div className="max-w-[500px]">
-      {users.length > 0 ? (
+      {data.length > 0 ? (
         <table className="w-full">
           <thead>
             <tr>
@@ -22,7 +47,7 @@ const Users = ({ _updateID }) => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {users.map((user) => {
+            {data.map((user) => {
               return (
                 <tr key={user.name}>
                   <td className="">{user.id}</td>
